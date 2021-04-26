@@ -35,6 +35,7 @@ class App extends React.Component{
     this.setState({ modalActualizar: false });
   };
 
+  
   //cambio el estado del modal CREAR para mostrarlo/ocultarlo
   mostrarModalInsertar = () => {
     this.setState({
