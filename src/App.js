@@ -2,6 +2,8 @@ import React from 'react';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Table, Button, Modal, ModalBody, ModalHeader, ModalFooter, FormGroup, Container } from 'reactstrap';
+import { AddModal } from './components/AddModal';
+import { EditModal } from './components/EditModal';
 
 const data = [
   {id: 1, puesto: "Scrum Master", empresa: "tech", ciudad: "LR", pais: "ARG"},
@@ -10,7 +12,9 @@ const data = [
 ]
 
 class App extends React.Component{
-  state = {
+  constructor(props){
+    super(props)
+    this.state = {
     data: data,
     modalActualizar: false,
     modalInsertar: false,
@@ -19,9 +23,12 @@ class App extends React.Component{
       puesto: "",
       empresa: "",
       ciudad: "",
-      pais: "",
+      pais: "", 
     },
   };
+  this.editar = this.editar.bind(this)
+  this.insertar = this.insertar.bind(this)
+  }
 
   //cambio el estado del modal EDITAR para mostrarlo/ocultarlo
   mostrarModalActualizar = (dato) => {
@@ -144,7 +151,8 @@ class App extends React.Component{
         </Table>
       </Container>  
       
-      <Modal isOpen={this.state.modalActualizar}>
+      {/* modal editar
+       <Modal isOpen={this.state.modalActualizar}>
           <ModalHeader>
            <div><h3>Editar Registro</h3></div>
           </ModalHeader>
@@ -193,8 +201,9 @@ class App extends React.Component{
             </Button>
           </ModalFooter>
         </Modal>
-
-        <Modal isOpen={this.state.modalInsertar}>
+ */}
+        {/* modal insertar 
+          <Modal isOpen={this.state.modalInsertar}>
           <ModalHeader>
            <div><h3>Insertar Puesto</h3></div>
           </ModalHeader>
@@ -239,7 +248,7 @@ class App extends React.Component{
               Cancelar
             </Button>
           </ModalFooter>
-        </Modal>
+        </Modal> */}
       </>
     );
   }
