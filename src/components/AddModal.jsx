@@ -1,39 +1,44 @@
 import React from 'react';
+import { Table, Button, Modal, ModalBody, ModalHeader, ModalFooter, FormGroup, Container } from 'reactstrap';
 
 
 export class AddModal extends React.Component {
   constructor(props){
+      
       super(props)
       this.props = props
-      this.state = {
-        data: data,
-        modalActualizar: false,
-        modalInsertar: false,
-        form: {
-          id: "",
+      this.handleChange = this.handleChange.bind(this);
+      this.insertarPuesto = this.insertarPuesto.bind(this);
+      this.state={
+          id:Date.now(),
           puesto: "",
           empresa: "",
           ciudad: "",
           pais: "", 
-        },
-      }
+        }
+      
   };
 
+
+  handleChange (e){
+    this.setState({
+      ...this.state,
+      [e.target.name] : e.target.value
+    })
+  }
+
+  insertarPuesto(){
+    this.props.insertarPuesto(this.state);
+  }
   
   render(){
     return(
         <>
-          <Modal isOpen={this.state.modalInsertar}>
+        <Modal isOpen="true">
           <ModalHeader>
            <div><h3>Insertar Puesto</h3></div>
           </ModalHeader>
           <ModalBody>
-            <FormGroup>
-              <label>
-                Id: 
-              </label>              
-              <input className="form-control" readOnly type="text" value={this.state.data.length+1}/>
-            </FormGroup>            
             <FormGroup>
               <label>
                 Puesto: 
@@ -61,10 +66,10 @@ export class AddModal extends React.Component {
             </FormGroup>
           </ModalBody>
           <ModalFooter>
-            <Button color="primary" onClick={() => this.insertar()}>
+            <Button color="primary" onClick={this.insertarPuesto}>
               Insertar
             </Button>
-            <Button className="btn btn-danger" onClick={() => this.cerrarModalInsertar()}>
+            <Button className="btn btn-danger" onClick={this.props.cerrarModal}>
               Cancelar
             </Button>
           </ModalFooter>

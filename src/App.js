@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Table, Button, Modal, ModalBody, ModalHeader, ModalFooter, FormGroup, Container } from 'reactstrap';
+import { Table, Button, Container } from 'reactstrap';
 import { AddModal } from './components/AddModal';
 import { EditModal } from './components/EditModal';
 
@@ -15,7 +15,7 @@ class App extends React.Component{
   constructor(props){
     super(props)
     this.state = {
-    data: data,
+    data: [],
     modalActualizar: false,
     modalInsertar: false,
     form: {
@@ -94,12 +94,12 @@ class App extends React.Component{
   };
 
   //Funcion para CREAR nuevo registro
-  insertar= ()=>{
-    var valorNuevo= {...this.state.form};
-    valorNuevo.id=this.state.data.length+1;
+  insertar= (puesto)=>{
     var lista= this.state.data;
-    lista.push(valorNuevo);
-    this.setState({ modalInsertar: false, data: lista });
+    this.setState({
+      data:[...lista,puesto]
+    })
+    this.setState({ modalInsertar: false});
   }
 
   handleChange = (e) => {
@@ -118,6 +118,14 @@ class App extends React.Component{
         <h1 className="">Listado Puestos</h1> 
         <Button color="success" onClick={()=>this.mostrarModalInsertar()}>Crear Puesto</Button>
         <br/><br/>
+        { 
+          this.state.modalInsertar 
+          ? <AddModal 
+                cerrarModal={this.cerrarModalInsertar} 
+                insertarPuesto = {this.insertar}
+                data={this.state.data}
+            /> 
+          : null }
         <Table className="table table-striped table-success aling-middle">
           <thead>
             <tr>
@@ -130,8 +138,8 @@ class App extends React.Component{
             </tr>
           </thead>
           <tbody>
-            {this.state.data.map((dato)=>(
-              <tr>
+            {this.state.data.map((dato,index)=>(
+              <tr key={index}>
                 <td>{dato.id}</td>
                 <td>{dato.puesto}</td>
                 <td>{dato.empresa}</td>
@@ -148,107 +156,16 @@ class App extends React.Component{
               </tr>
             ))}
           </tbody>
+          { 
+          this.state.modalActualizar 
+          ? <EditModal 
+                cerrarModal={this.cerrarModalActualizar} 
+                actualizar = {this.editar}
+                data={this.state.form}
+            /> 
+          : null }
         </Table>
       </Container>  
-      
-      {/* modal editar
-       <Modal isOpen={this.state.modalActualizar}>
-          <ModalHeader>
-           <div><h3>Editar Registro</h3></div>
-          </ModalHeader>
-          <ModalBody>
-            <FormGroup>
-              <label>
-               Id:
-              </label>
-              <input className="form-control" readOnly type="text" value={this.state.data.length+1}/>
-            </FormGroup>
-            <FormGroup>
-              <label>
-                Puesto: 
-              </label>
-              <input className="form-control" name="puesto" type="text" onChange={this.handleChange} value={this.state.form.puesto} />
-            </FormGroup>
-            <FormGroup>
-              <label>
-                Empresa: 
-              </label>
-              <input className="form-control" name="empresa" type="text" onChange={this.handleChange} value={this.state.form.empresa} />
-            </FormGroup>
-            <FormGroup>
-              <label>
-                Ciudad: 
-              </label>
-              <input className="form-control" name="ciudad" type="text" onChange={this.handleChange} value={this.state.form.ciudad} />
-            </FormGroup>
-            <FormGroup>
-              <label>
-                Pais: 
-              </label>
-              <input className="form-control" name="pais" type="text" onChange={this.handleChange} value={this.state.form.pais} />
-            </FormGroup>
-          </ModalBody>
-          <ModalFooter>
-            <Button
-              color="primary"
-              onClick={() => this.editar(this.state.form)}>
-                Editar
-            </Button>
-            <Button
-              color="danger"
-              onClick={() => this.cerrarModalActualizar()}>
-              Cancelar
-            </Button>
-          </ModalFooter>
-        </Modal>
- */}
-        {/* modal insertar 
-          <Modal isOpen={this.state.modalInsertar}>
-          <ModalHeader>
-           <div><h3>Insertar Puesto</h3></div>
-          </ModalHeader>
-          <ModalBody>
-            <FormGroup>
-              <label>
-                Id: 
-              </label>              
-              <input className="form-control" readOnly type="text" value={this.state.data.length+1}/>
-            </FormGroup>            
-            <FormGroup>
-              <label>
-                Puesto: 
-              </label>
-              <input
-                className="form-control" name="puesto" type="text" onChange={this.handleChange}/>
-            </FormGroup>            
-            <FormGroup>
-              <label>
-                Empresa: 
-              </label>
-              <input className="form-control" name="empresa" type="text" onChange={this.handleChange} />
-            </FormGroup>
-            <FormGroup>
-              <label>
-                Ciudad: 
-              </label>
-              <input className="form-control" name="ciudad" type="text" onChange={this.handleChange} />
-            </FormGroup>
-            <FormGroup>
-              <label>
-                Pais: 
-              </label>
-              <input className="form-control" name="pais" type="text" onChange={this.handleChange}/>
-            </FormGroup>
-          </ModalBody>
-          <ModalFooter>
-            <Button color="primary" onClick={() => this.insertar()}>
-              Insertar
-            </Button>
-            <Button className="btn btn-danger" onClick={() => this.cerrarModalInsertar()}>
-              Cancelar
-            </Button>
-          </ModalFooter>
-        </Modal> */}
       </>
     );
   }
