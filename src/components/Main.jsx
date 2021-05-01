@@ -22,7 +22,7 @@ class Main extends React.Component{
   this.editar = this.editar.bind(this)
   this.insertar = this.insertar.bind(this)
   }
-  //cambio el estado del modal EDITAR para mostrarlo
+  /* //cambio el estado del modal EDITAR para mostrarlo
   mostrarModalActualizar = (dato) => {
     this.setState({
       form: dato,
@@ -41,6 +41,29 @@ class Main extends React.Component{
   cerrarModal = () => {
     this.setState({ 
         modalActualizar: !this.state.modalActualizar,
+    });
+  }; */
+
+  //cambio el estado del modal EDITAR para mostrarlo
+  mostrarModalActualizar = (dato) => {
+    this.setState({
+      form: dato,
+      modalActualizar: !this.state.modalActualizar,
+    });
+  };
+ 
+  //cambio el estado del modal CREAR para mostrarlo
+  mostrarModalInsertar = () => {
+    this.setState({
+      modalInsertar: !this.state.modalInsertar,
+    });
+  };
+ 
+  // cierro los modales
+  cerrarModal = () => {
+    this.setState({ 
+        modalActualizar: false,
+        modalInsertar: false,
     });
   };
 
