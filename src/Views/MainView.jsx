@@ -1,10 +1,10 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css'; 
 import { Table, Button, Container } from 'reactstrap';
-import { AddModal } from './AddModal';
-import { EditModal } from './EditModal';
+import { AddModal } from '../components/AddModal';
+import { EditModal } from '../components/EditModal';
 
-class Main extends React.Component{
+export class MainView extends React.Component{
   constructor(props){
     super(props)
     this.state = {
@@ -172,4 +172,4 @@ class Main extends React.Component{
     );
   }
 }
-export default Main;
+export default MainView;
