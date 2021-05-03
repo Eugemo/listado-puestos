@@ -56,13 +56,13 @@ export class AddModal extends React.Component {
               <label>
                 Pais: 
               </label>
-              <select className="form-control" name="pais" type="text" onChange={this.handleChange}/>
+              <input className="form-control" name="pais" type="text" onChange={this.handleChange}/>
             </FormGroup>
             <FormGroup>
               <label>
                 Ciudad: 
               </label>
-              <select className="form-control" name="ciudad" type="text" onChange={this.handleChange} />
+              <input className="form-control" name="ciudad" type="text" onChange={this.handleChange} />
             </FormGroup>
             
           </ModalBody>

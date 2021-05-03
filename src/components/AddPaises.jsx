@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Button, Container } from 'reactstrap'
+import { Form, FormGroup, Button, Container } from 'reactstrap'
 
 export class AddPaises extends React.Component {
     constructor(){
@@ -30,21 +30,26 @@ export class AddPaises extends React.Component {
   render() {
     return (
         <Container className="body-paises">
-                <h3>Insertar Paises</h3>
-            <Form>
-                <label>Pais: </label>{" "}
-                <input type="text" value={this.state.newPais} onChange={(e) => this.handleNewPais(e)}/> 
-                {"  "}
-            
-                <Button color="primary" onClick={this.AddPais}>
-                Insertar
-                </Button>
-            </Form>
+        <div>
+            <h3>Insertar Paises</h3>
+        </div>
+        <Form>
+            <label>Pais: </label>{" "}
+            <input type="text" value={this.state.newPais} onChange={(e) => this.handleNewPais(e)}/> 
+            {"  "}
+            <Button color="primary" onClick={this.AddPais}>
+              Insertar
+            </Button>
+              
+        </Form>
         <ul>
                 {this.state.paises.map((elem, idx) => {return <li key={idx}>{elem}</li>})}
         </ul>
+        
         </Container>
+        
     )
   }
- 
+
+  
 }
