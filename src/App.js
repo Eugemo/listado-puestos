@@ -6,6 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { MainView } from './Views/MainView';
 import { PaisesView } from './Views/PaisesView';
 import { CiudadesView } from './Views/CiudadesView';
+import { NotFoundView } from './Views/NotFoundView';
 
 const App = () => (
   <div className="App">
@@ -15,6 +16,7 @@ const App = () => (
         <Route path="/"  exact component={MainView} />
         <Route path="/PaisesView"  exact component={PaisesView} />
         <Route path="/CiudadesView"  exact component={CiudadesView} />
+        <Route component={NotFoundView} />
       </Switch>
     </div>
   </div>
