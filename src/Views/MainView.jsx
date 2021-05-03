@@ -116,8 +116,8 @@ export class MainView extends React.Component{
   render(){
     return(
       <>
-      <Container>
-        <h1 className="">Listado Puestos</h1> 
+      <Container className="body-puestos">
+        <h1>Listado Puestos</h1> 
         <Button color="success" onClick={()=>this.mostrarModalInsertar()}>Crear Puesto</Button>
         <br/><br/>
         { 

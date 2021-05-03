@@ -1,12 +1,11 @@
 import React from 'react';
-import { AddModal } from '../components/AddModal'
-import { EditModal } from '../components/EditModal'
+import { AddPaises } from '../components/AddPaises'
 
 export class PaisesView extends React.Component{
     render(){
         return(
             <div>
-                <p>esta es la vista de paises</p>
+                <AddPaises />
             </div>
         )
     }

@@ -1,10 +1,11 @@
 import React from 'react';
+import { AddCiudades } from '../components/AddCiudades'
 
 export class CiudadesView extends React.Component{
     render(){
         return(
             <div>
-                <p>esta es la vista de Ciudades</p>
+                <AddCiudades />
             </div>
         )
     }

@@ -10,3 +10,35 @@ h1 {
   height: 372px;
   
 }
+
+.body-paises{
+
+  background-image: url('./assets/img/mapa.jpg');
+  background-repeat: no-repeat;
+  height: 570px;
+  width: 100%;
+  background-size: cover;
+  background-position: right;
+  
+}
+
+.body-ciudades{
+  background-image: url('./assets/img/ciudades.jpg');
+  background-repeat: no-repeat;
+  height: 570px;
+  width: 100%;
+  background-size: cover;
+  background-position: right;
+  
+}
+
+.body-puestos{
+  background-image: url('./assets/img/puestos.jpg');
+  background-color: rgba(109, 137, 194, 0.993);
+  background-repeat: no-repeat;
+  height: 500px;
+  width: 100%;
+  background-size: contain;
+  background-position: right;
+  margin-top: 20px;  
+}

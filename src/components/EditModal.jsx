@@ -58,16 +58,16 @@ export class EditModal extends React.Component {
             </FormGroup>
             <FormGroup>
               <label>
-                Ciudad: 
-              </label>
-              <input className="form-control" name="ciudad" type="text" onChange={this.handleChange} value={this.state.ciudad} />
-            </FormGroup>
-            <FormGroup>
-              <label>
                 Pais: 
               </label>
               <input className="form-control" name="pais" type="text" onChange={this.handleChange} value={this.state.pais} />
             </FormGroup>
+            <FormGroup>
+              <label>
+                Ciudad: 
+              </label>
+              <input className="form-control" name="ciudad" type="text" onChange={this.handleChange} value={this.state.ciudad} />
+            </FormGroup>            
           </ModalBody>
           <ModalFooter>
             <Button

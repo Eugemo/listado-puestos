@@ -54,16 +54,17 @@ export class AddModal extends React.Component {
             </FormGroup>
             <FormGroup>
               <label>
-                Ciudad: 
+                Pais: 
               </label>
-              <input className="form-control" name="ciudad" type="text" onChange={this.handleChange} />
+              <select className="form-control" name="pais" type="text" onChange={this.handleChange}/>
             </FormGroup>
             <FormGroup>
               <label>
-                Pais: 
+                Ciudad: 
               </label>
-              <input className="form-control" name="pais" type="text" onChange={this.handleChange}/>
+              <select className="form-control" name="ciudad" type="text" onChange={this.handleChange} />
             </FormGroup>
+            
           </ModalBody>
           <ModalFooter>
             <Button color="primary" onClick={this.insertarPuesto}>
