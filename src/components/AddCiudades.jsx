@@ -2,29 +2,29 @@ import React from 'react';
 import { Form, Button, Container } from 'reactstrap'
 
 export class AddCiudades extends React.Component {
-    constructor(){
-      
+    constructor(){      
         super()
-        //this.props = props
-        //this.handleChange = this.handleChange.bind(this);
-       // this.insertarPuesto = this.insertarPuesto.bind(this);
-        this.state = {
+            this.state = {
             ciudades: [],
             newCiudad: '', 
-          };
-  }
+            };
+    }
 
-  AddCiudad = () => {
+    addCiudad = () => {
       let ciudad = this.state.newCiudad;
       this.setState({
           ciudades: [...this.state.ciudades, ciudad]
       });
-  }
+    }
 
   handleNewPCiudad = (e) => {
     this.setState({
         newCiudad: e.target.value
     })
+  }
+
+  saveData = () =>{
+    window.localStorage.setItem("ciudades", JSON.stringify(this.state.ciudades))
   }
 
   render() {
@@ -36,9 +36,12 @@ export class AddCiudades extends React.Component {
                 <input type="text" value={this.state.newCiudad} onChange={(e) => this.handleNewPCiudad(e)}/> 
                 {"  "}
             
-                <Button color="primary" onClick={this.AddCiudad}>
+                <Button color="primary" onClick={this.addCiudad}>
                 Insertar
-                </Button>
+                </Button>{" "}
+                <Button color="danger" onClick={this.saveData}>
+				Guardar
+				</Button>   
             </Form>
         <ul>
                 {this.state.ciudades.map((elem, idx) => {return <li key={idx}>{elem}</li>})}

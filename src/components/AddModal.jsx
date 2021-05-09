@@ -1,6 +1,5 @@
 import React from 'react';
-import { Table, Button, Modal, ModalBody, ModalHeader, ModalFooter, FormGroup, Container } from 'reactstrap';
-
+import { Button, Modal, ModalBody, ModalHeader, ModalFooter, FormGroup, Select } from 'reactstrap';
 
 export class AddModal extends React.Component {
   constructor(props){
@@ -56,13 +55,20 @@ export class AddModal extends React.Component {
               <label>
                 Pais: 
               </label>
-              <input className="form-control" name="pais" type="text" onChange={this.handleChange}/>
+              <select className="form-control" name="pais" type="text" onChange={this.handleChange}>
+                <option value="Arg">Argentina</option>
+                <option value="Br">Brasil</option>
+              </select>
+
             </FormGroup>
             <FormGroup>
               <label>
                 Ciudad: 
               </label>
-              <input className="form-control" name="ciudad" type="text" onChange={this.handleChange} />
+              <select className="form-control" name="ciudad" type="text" onChange={this.handleChange}>
+                <option value="ciudad1">city1</option>
+                <option value="ciudad2">city2</option>
+              </select> 
             </FormGroup>
             
           </ModalBody>

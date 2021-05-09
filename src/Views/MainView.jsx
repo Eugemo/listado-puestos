@@ -22,28 +22,7 @@ export class MainView extends React.Component{
   this.editar = this.editar.bind(this)
   this.insertar = this.insertar.bind(this)
   }
-  /* //cambio el estado del modal EDITAR para mostrarlo
-  mostrarModalActualizar = (dato) => {
-    this.setState({
-      form: dato,
-      modalActualizar: !this.state.modalActualizar,
-    });
-  };
  
-  //cambio el estado del modal CREAR para mostrarlo
-  mostrarModalInsertar = () => {
-    this.setState({
-      modalInsertar: !this.state.modalInsertar,
-    });
-  };
- 
-  // cierro los modales
-  cerrarModal = () => {
-    this.setState({ 
-        modalActualizar: !this.state.modalActualizar,
-    });
-  }; */
-
   //cambio el estado del modal EDITAR para mostrarlo
   mostrarModalActualizar = (dato) => {
     this.setState({
@@ -172,4 +151,4 @@ export class MainView extends React.Component{
     );
   }
 }
-export default MainView;
+

@@ -1,30 +1,39 @@
 import React from 'react';
-import { Form, FormGroup, Button, Container } from 'reactstrap'
+import { Form, Button, Container } from 'reactstrap'
 
 export class AddPaises extends React.Component {
-    constructor(){
-      
-        super()
-        //this.props = props
-        //this.handleChange = this.handleChange.bind(this);
-       // this.insertarPuesto = this.insertarPuesto.bind(this);
-        this.state = {
-            paises: [],
-            newPais: '', 
-          };
+    
+  constructor(){
+    super()
+    this.state = {
+      paises: [],
+      newPais: '', 
+    };
   }
 
-  AddPais = () => {
+   addPais = () => {
       let pais = this.state.newPais;
       this.setState({
           paises: [...this.state.paises, pais]
       });
-  }
+  } 
 
   handleNewPais = (e) => {
     this.setState({
         newPais: e.target.value
     })
+  }
+
+  submitForm = (e) =>{
+    e.preventDefault();
+    const newPais = {
+      name: this.state.name,
+    }
+    this.props.addPais(newPais)
+  };
+
+  saveData = () =>{
+    window.localStorage.setItem("paises", JSON.stringify(this.state.paises))
   }
 
   render() {
@@ -33,17 +42,19 @@ export class AddPaises extends React.Component {
         <div>
             <h3>Insertar Paises</h3>
         </div>
-        <Form>
+          <Form>
             <label>Pais: </label>{" "}
-            <input type="text" value={this.state.newPais} onChange={(e) => this.handleNewPais(e)}/> 
+            <input type="text" name="pais" value={this.state.newPais} onChange={(e) => this.handleNewPais(e)}/> 
             {"  "}
-            <Button color="primary" onClick={this.AddPais}>
+            <Button color="primary" onClick={this.addPais}>
               Insertar
-            </Button>
-              
-        </Form>
+            </Button>{" "}
+            <Button color="danger" onClick={this.saveData}>
+					  Guardar
+				    </Button>              
+          </Form>
         <ul>
-                {this.state.paises.map((elem, idx) => {return <li key={idx}>{elem}</li>})}
+          {this.state.paises.map((elem, idx) => {return <li key={idx}>{elem}</li>})}
         </ul>
         
         </Container>
@@ -51,5 +62,4 @@ export class AddPaises extends React.Component {
     )
   }
 
-  
 }
