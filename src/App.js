@@ -11,7 +11,7 @@ import { NotFoundView } from './Views/NotFoundView';
 const App = () => (
   <div className="App">
     <NavbarListado />
-    <div Class="container"> 
+    <div className="container"> 
       <Switch>
         <Route path="/"  exact component={MainView} />
         <Route path="/PaisesView"  exact component={PaisesView} />

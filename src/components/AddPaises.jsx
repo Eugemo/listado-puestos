@@ -5,18 +5,22 @@ export class AddPaises extends React.Component {
     
   constructor(){
     super()
-    this.state = {
-      paises: [],
-      newPais: '', 
-    };
+    this.loadData();
   }
 
-   addPais = () => {
+  addPais = () => {
       let pais = this.state.newPais;
-      this.setState({
-          paises: [...this.state.paises, pais]
-      });
+      this.setState(
+        {paises: [...this.state.paises, pais]}, 
+        () => {this.saveData();}
+      );
   } 
+
+  deletePais = (id) =>{
+    this.setState({
+        paises: this.state.paises.filter((pais, idx) => idx !== id)
+    });
+}
 
   handleNewPais = (e) => {
     this.setState({
@@ -24,16 +28,17 @@ export class AddPaises extends React.Component {
     })
   }
 
-  submitForm = (e) =>{
-    e.preventDefault();
-    const newPais = {
-      name: this.state.name,
-    }
-    this.props.addPais(newPais)
-  };
-
-  saveData = () =>{
+  saveData = () => {
+    console.log(this.state.paises);
     window.localStorage.setItem("paises", JSON.stringify(this.state.paises))
+  }
+
+  loadData = () =>{
+    const paisesAlmacenados = JSON.parse(window.localStorage.getItem("paises"));
+    this.state = {
+      paises: paisesAlmacenados || [],
+      newPais: '', 
+    };
   }
 
   render() {
@@ -48,18 +53,14 @@ export class AddPaises extends React.Component {
             {"  "}
             <Button color="primary" onClick={this.addPais}>
               Insertar
-            </Button>{" "}
-            <Button color="danger" onClick={this.saveData}>
-					  Guardar
-				    </Button>              
+            </Button>{" "}            
           </Form>
         <ul>
-          {this.state.paises.map((elem, idx) => {return <li key={idx}>{elem}</li>})}
-        </ul>
-        
+          {
+           this.state.paises?.map((elem, idx) => {return <li key={idx}>{elem}</li>})
+          }
+        </ul>        
         </Container>
-        
     )
   }
-
 }

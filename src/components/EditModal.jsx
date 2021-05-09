@@ -1,5 +1,5 @@
 import React from 'react';
-import { Table, Button, Modal, ModalBody, ModalHeader, ModalFooter, FormGroup, Container } from 'reactstrap';
+import { Button, Modal, ModalBody, ModalHeader, ModalFooter, FormGroup } from 'reactstrap';
 
 export class EditModal extends React.Component {
   constructor(props){

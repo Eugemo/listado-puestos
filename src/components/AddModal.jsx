@@ -1,5 +1,6 @@
 import React from 'react';
-import { Button, Modal, ModalBody, ModalHeader, ModalFooter, FormGroup, Select } from 'reactstrap';
+import { Button, Modal, ModalBody, ModalHeader, ModalFooter, FormGroup} from 'reactstrap';
+
 
 export class AddModal extends React.Component {
   constructor(props){
@@ -14,7 +15,8 @@ export class AddModal extends React.Component {
           empresa: "",
           ciudad: "",
           pais: "", 
-        paises: []
+        paises: [],
+        ciudades: []
       }
       
       
@@ -77,19 +79,22 @@ export class AddModal extends React.Component {
 					>
 						<option value={JSON.stringify({})}>Elija Pais</option>
                         { this.state.paises.map((pais, index) => (
-                            <option key={index+1} value={JSON.stringify(pais)}>{pais.name}</option>
+                            <option key={index+1} value={JSON.stringify(pais)}>{pais}</option>
                         ))}
 					</select>
-
             </FormGroup>
             <FormGroup>
               <label>
                 Ciudad: 
               </label>
-              <select className="form-control" name="ciudad" type="text" onChange={this.handleChange}>
-                <option value="ciudad1">city1</option>
-                <option value="ciudad2">city2</option>
-              </select> 
+              <select class="custom-select" id="inputGroupSelect01" name="ciudad"
+						  onChange={(e) => this.handleSelect(e)}
+						  value={JSON.stringify(this.state.ciudad)} >
+					    	<option value={JSON.stringify({})}>Elija Ciudad</option>
+                  { this.state.ciudades.map((ciudad, index) => (
+                  <option key={index+1} value={JSON.stringify(ciudad)}>{ciudad}</option>
+                        ))}
+					</select>
             </FormGroup>
             
           </ModalBody>
