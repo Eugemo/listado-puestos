@@ -14,16 +14,32 @@ export class AddModal extends React.Component {
           empresa: "",
           ciudad: "",
           pais: "", 
-        }
+        paises: []
+      }
+      
       
   };
 
+  componentDidMount() {
+		if(localStorage.getItem("paises") != null){
+			this.setState({
+				paises: JSON.parse(localStorage.getItem("paises"))
+			})
+		}
+	}
 
   handleChange (e){
     this.setState({
       ...this.state,
       [e.target.name] : e.target.value
     })
+  }
+
+  handleSelect = (e) => {
+		e.preventDefault();
+		this.setState({
+			pais: JSON.parse(e.target.value),
+		});  
   }
 
   insertarPuesto(){
@@ -55,10 +71,15 @@ export class AddModal extends React.Component {
               <label>
                 Pais: 
               </label>
-              <select className="form-control" name="pais" type="text" onChange={this.handleChange}>
-                <option value="Arg">Argentina</option>
-                <option value="Br">Brasil</option>
-              </select>
+              <select class="custom-select" id="inputGroupSelect01" name="pais"
+						onChange={(e) => this.handleSelect(e)}
+						value={JSON.stringify(this.state.pais)}
+					>
+						<option value={JSON.stringify({})}>Elija Pais</option>
+                        { this.state.paises.map((pais, index) => (
+                            <option key={index+1} value={JSON.stringify(pais)}>{pais.name}</option>
+                        ))}
+					</select>
 
             </FormGroup>
             <FormGroup>
