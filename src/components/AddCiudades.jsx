@@ -7,6 +7,7 @@ export class AddCiudades extends React.Component {
     this.loadData();
   }
 
+  
   loadData = () =>{    
     const paisesAlmacenados = JSON.parse(window.localStorage.getItem("paises"));
     const ciudadesAlmacenadas = JSON.parse(window.localStorage.getItem("ciudades"));

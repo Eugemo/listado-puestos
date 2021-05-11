@@ -3,10 +3,10 @@ import './App.css';
 import { Route, Switch } from 'react-router-dom';
 import { NavbarListado } from './components/NavbarListado' 
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { MainView } from './Views/MainView';
-import { PaisesView } from './Views/PaisesView';
-import { CiudadesView } from './Views/CiudadesView';
-import { NotFoundView } from './Views/NotFoundView';
+import { MainView } from './views/MainView';
+import { PaisesView } from './views/PaisesView';
+import { CiudadesView } from './views/CiudadesView';
+import { NotFoundView } from './views/NotFoundView';
 
 const App = () => (
   <div className="App">

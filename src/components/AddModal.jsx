@@ -28,7 +28,13 @@ export class AddModal extends React.Component {
 				paises: JSON.parse(localStorage.getItem("paises"))
 			})
 		}
+    if(localStorage.getItem("ciudades") != null){
+			this.setState({
+				ciudades: JSON.parse(localStorage.getItem("ciudades"))
+			})
+		}
 	}
+  
 
   handleChange (e){
     this.setState({
@@ -37,10 +43,19 @@ export class AddModal extends React.Component {
     })
   }
 
-  handleSelect = (e) => {
+  handleSelectCountry = (e) => {
 		e.preventDefault();
 		this.setState({
 			pais: JSON.parse(e.target.value),
+      
+		});  
+  }
+
+  handleSelectCity = (e) => {
+		e.preventDefault();
+		this.setState({
+			ciudad: JSON.parse(e.target.value),
+      
 		});  
   }
 
@@ -74,7 +89,7 @@ export class AddModal extends React.Component {
                 Pais: 
               </label>
               <select class="custom-select" id="inputGroupSelect01" name="pais"
-						onChange={(e) => this.handleSelect(e)}
+						onChange={(e) => this.handleSelectCountry(e)}
 						value={JSON.stringify(this.state.pais)}
 					>
 						<option value={JSON.stringify({})}>Elija Pais</option>
@@ -88,7 +103,7 @@ export class AddModal extends React.Component {
                 Ciudad: 
               </label>
               <select class="custom-select" id="inputGroupSelect01" name="ciudad"
-						  onChange={(e) => this.handleSelect(e)}
+						  onChange={(e) => this.handleSelectCity(e)}
 						  value={JSON.stringify(this.state.ciudad)} >
 					    	<option value={JSON.stringify({})}>Elija Ciudad</option>
                   { this.state.ciudades.map((ciudad, index) => (
