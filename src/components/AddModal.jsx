@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, Modal, ModalBody, ModalHeader, ModalFooter, FormGroup} from 'reactstrap';
-
+import { postData } from '../jobs/puestosJobs'
 
 export class AddModal extends React.Component {
   constructor(props){
@@ -23,7 +23,7 @@ export class AddModal extends React.Component {
   };
 
   componentDidMount() {
-		if(localStorage.getItem("paises") != null){
+	/* 	if(localStorage.getItem("paises") != null){
 			this.setState({
 				paises: JSON.parse(localStorage.getItem("paises"))
 			})
@@ -32,7 +32,8 @@ export class AddModal extends React.Component {
 			this.setState({
 				ciudades: JSON.parse(localStorage.getItem("ciudades"))
 			})
-		}
+		} */
+    
 	}
   
 
@@ -61,6 +62,7 @@ export class AddModal extends React.Component {
 
   insertarPuesto(){
     this.props.insertarPuesto(this.state);
+    
   }
   
   render(){

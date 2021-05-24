@@ -3,12 +3,14 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Table, Button, Container } from 'reactstrap';
 import { AddModal } from '../components/AddModal';
 import { EditModal } from '../components/EditModal';
+import { getData } from '../jobs/puestosJobs'
 
 export class MainView extends React.Component{
   constructor(props){
     super(props)
     this.state = {
     data: [],
+    withError: false,
     modalActualizar: false,
     modalInsertar: false,
     form: {
@@ -23,6 +25,13 @@ export class MainView extends React.Component{
   this.insertar = this.insertar.bind(this)
   }
  
+  ///intento de mostrar la info de l aAPI
+  componentDidMount(){
+    getData().then(res => this.setState({
+      data: res
+    }))
+  }
+
   //cambio el estado del modal EDITAR para mostrarlo
   mostrarModalActualizar = (dato) => {
     this.setState({
@@ -97,6 +106,7 @@ export class MainView extends React.Component{
       <>
       <Container className="body-puestos">
         <h1>Listado Puestos</h1> 
+        {this.state.withError && <p>Error de conexion con la API Rest</p>}
         <Button color="success" onClick={()=>this.mostrarModalInsertar()}>Crear Puesto</Button>
         <br/><br/>
         { 
