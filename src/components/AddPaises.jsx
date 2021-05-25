@@ -1,6 +1,6 @@
 import React from 'react';
-import { Form, Button, Container } from 'reactstrap';
-import { getPais } from '../jobs/puestosJobs'
+import { Container, Form, Button } from 'reactstrap';
+import { getPais, postPais } from '../jobs/puestosJobs'
 
 export class AddPaises extends React.Component {
     
@@ -9,7 +9,7 @@ export class AddPaises extends React.Component {
     //this.loadData();
     this.state = {
       data: [],
-    
+      newPais:'',
     };
   }
 
@@ -17,14 +17,17 @@ export class AddPaises extends React.Component {
     getPais().then(res => this.setState({
       data: res
     }))
+        
   }
 
+  
   addPais = () => {
-      let pais = this.state.newPais;
-      this.setState(
-        {paises: [...this.state.paises, pais]}, 
-        () => {this.saveData();}
-      );
+     
+      postPais(this.state.newPais).then(res => this.setState({
+          data: [...this.state.data, res]
+      }))
+      
+    
   } 
 
   deletePais = (id) =>{
@@ -39,10 +42,11 @@ export class AddPaises extends React.Component {
     })
   }
 
-  saveData = () => {
-    console.log(this.state.paises);
-    window.localStorage.setItem("paises", JSON.stringify(this.state.paises))
-  }
+  /* saveData = () => {
+    //console.log(this.state.paises);
+    //window.localStorage.setItem("paises", JSON.stringify(this.state.paises))
+    
+  } */
 
   /* loadData = () =>{
     const paisesAlmacenados = JSON.parse(window.localStorage.getItem("paises"));
@@ -58,20 +62,20 @@ export class AddPaises extends React.Component {
         <div>
             <h3>Insertar Paises</h3>
         </div>
-          {/* <Form>
+          <Form>
             <label>Pais: </label>{" "}
             <input type="text" name="pais" value={this.state.newPais} onChange={(e) => this.handleNewPais(e)}/> 
             {"  "}
             <Button color="primary" onClick={this.addPais}>
               Insertar
             </Button>{" "}            
-          </Form> */}
+          </Form>
         <ul>
         {
             this.state.data.map((dato,index) => (
                  <li key={index}>                 
-                  {dato.id}                
-                  {dato.name}
+                  {"ID: "} {dato.id} 
+                  {" - "} {dato.name}
                   
                  </li>
             ))

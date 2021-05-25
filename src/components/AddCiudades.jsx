@@ -1,6 +1,6 @@
 import React from 'react';
 import { Form, Button, Container, FormGroup } from 'reactstrap'
-import { getCiudadPais } from '../jobs/puestosJobs'
+import { getCiudadPais, postCiudad, getPais } from '../jobs/puestosJobs'
 
 export class AddCiudades extends React.Component {
   constructor(){      
@@ -8,7 +8,8 @@ export class AddCiudades extends React.Component {
    // this.loadData();
     this.state = {
       data: [],
-    
+      countries:[],
+      newCiudad: '',
     };
   }
 
@@ -16,6 +17,7 @@ export class AddCiudades extends React.Component {
     getCiudadPais().then(res => this.setState({
       data: res
     }))
+    
   }
   
   /* loadData = () =>{    
@@ -29,11 +31,11 @@ export class AddCiudades extends React.Component {
   } */
 
   addCiudad = () => {
-    let ciudad = this.state.newCiudad;
-    this.setState(
-      {ciudades: [...this.state.ciudades, ciudad]},
-      this.saveData
-    );
+     
+    postCiudad(this.state.newCiudad).then(res => this.setState({
+      data: [...this.state.data, res]
+  }))
+  
   }
 
   handleNewPCiudad = (e) => {
@@ -42,9 +44,9 @@ export class AddCiudades extends React.Component {
     })
   }
 
-  saveData = () =>{
+  /* saveData = () =>{
     window.localStorage.setItem("ciudades", JSON.stringify(this.state.ciudades))
-  }
+  } */
 
   render() {
     return (
@@ -55,27 +57,28 @@ export class AddCiudades extends React.Component {
                 <label>Ciudad: </label>{" "}
                 <input type="text" value={this.state.newCiudad} onChange={(e) => this.handleNewPCiudad(e)}/>
               </FormGroup>
-             {/*  <FormGroup>
+             <FormGroup>
                 <label>Pais:</label>
-                <select class="custom-select" name="pais">
-                  <option value={JSON.stringify({})}>Elija Pais</option>
+                <select className="custom-select" name="pais">
+                  <option value=''>Elija Pais</option>
                   { 
-                    this.state.paises.map((pais, index) => (
-                      <option key={index+1} value={pais}>{pais}</option>
+                    this.state.countries.map((countrie, index) => (
+                      <option key={index+1} value={countrie.name}>{countrie.name}</option>
                     ))
                   }
                 </select>
-              </FormGroup>    */}         
+              </FormGroup>        
               <Button color="primary" onClick={this.addCiudad}>Insertar</Button>
             </Form>
         <ul>
+        
            {
             this.state.data.map((dato,index) => (
                  <li key={index}>                 
-                  {dato.id}                
-                  {dato.name}
-                  {dato.countrieId}
-                  {dato.countrie.name}
+                  {"ID: "} {dato.id}                
+                  {" Ciudad: "} {dato.name}
+                  {" - ID: "} {dato.countrieId}
+                  {" Pais: "} {dato.countrie.name}
                  </li>
             ))
           } 

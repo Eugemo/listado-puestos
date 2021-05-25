@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { data } from 'jquery';
 
 export const getData = async () => {
     try {
@@ -48,6 +49,8 @@ export const getPais = async () => {
     }
 };
 
+
+
 export const getCiudadPais = async () => {
     try {
         const res = await axios.get("https://api-fake-pilar-tecno.herokuapp.com/places?_expand=countrie")
@@ -56,3 +59,33 @@ export const getCiudadPais = async () => {
         console.error(err)
     }
 };
+
+export const postCiudad = async (place) => {
+    const configRequest = {
+        method: 'post',
+        url: 'https://api-fake-pilar-tecno.herokuapp.com/places',
+        data: place
+    }
+    try {
+        const res = await axios(configRequest)
+        return res.data
+    } catch (err) {
+        console.error(err)
+        
+    }
+};
+
+export const postPais = async (countrie) => {
+    const configRequest = {
+        method: 'post',
+        url: 'https://api-fake-pilar-tecno.herokuapp.com/countries',
+        data: {name: countrie}
+    }
+    try {
+        const res = await axios(configRequest)
+        return res.data
+    } catch (err) {
+        console.error(err)
+        
+    }
+}    

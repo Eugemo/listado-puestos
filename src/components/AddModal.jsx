@@ -15,8 +15,8 @@ export class AddModal extends React.Component {
           empresa: "",
           ciudad: "",
           pais: "", 
-        paises: [],
-        ciudades: []
+        countries: [],
+        places: []
       }
       
       
@@ -58,7 +58,7 @@ export class AddModal extends React.Component {
   handleSelectCity = (e) => {
 		e.preventDefault();
 		this.setState({
-			ciudad: JSON.parse(e.target.value),
+			place: JSON.parse(e.target.value),
       
 		});  
   }
@@ -95,11 +95,11 @@ export class AddModal extends React.Component {
               </label>
               <select class="custom-select" id="inputGroupSelect01" name="pais"
 						onChange={(e) => this.handleSelectCountry(e)}
-						value={JSON.stringify(this.state.pais)}
+						value={JSON.stringify(this.state.countrie)}
 					>
-						<option value={JSON.stringify({})}>Elija Pais</option>
-                        { this.state.paises.map((pais, index) => (
-                            <option key={index+1} value={JSON.stringify(pais)}>{pais}</option>
+						<option value='' >Elija Pais</option>
+                        { this.state.data.map((countrie, index) => (
+                            <option key={index+1} value={JSON.stringify(countrie)}>{countrie}</option>
                         ))}
 					</select>
             </FormGroup>

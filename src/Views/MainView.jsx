@@ -105,9 +105,9 @@ export class MainView extends React.Component{
   
     var lista = this.state.data;
     postData()
-       .then(nuevoPuesto => {
+       .then(newPosition => {
         this.setState({
-          data:[...lista,nuevoPuesto]
+          data:[...lista,newPosition]
         })
       })
       .catch(err => {
@@ -140,8 +140,7 @@ export class MainView extends React.Component{
                 <th>Id</th>
                 <th>Puesto</th>
                 <th>Empresa</th>
-                <th>Descripcion</th>
-               
+                <th>Descripcion</th>               
                 <th>Acciones</th>
             </tr>
           </thead>
