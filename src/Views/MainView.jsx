@@ -3,7 +3,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Table, Button, Container } from 'reactstrap';
 import { AddModal } from '../components/AddModal';
 import { EditModal } from '../components/EditModal';
-import { getData } from '../jobs/puestosJobs'
+import { getData, postData } from '../jobs/puestosJobs'
+
 
 export class MainView extends React.Component{
   constructor(props){
@@ -25,7 +26,7 @@ export class MainView extends React.Component{
   this.insertar = this.insertar.bind(this)
   }
  
-  ///intento de mostrar la info de l aAPI
+  ///intento de mostrar la info de la aAPI
   componentDidMount(){
     getData().then(res => this.setState({
       data: res
@@ -86,8 +87,8 @@ export class MainView extends React.Component{
     }
   };
   //Funcion para CREAR nuevo registro
-  insertar= (puesto)=>{
-    var lista= this.state.data;
+  insertar= (position)=>{
+   /*  var lista= this.state.data;
     this.setState({
       data:[...lista,puesto]
     })
@@ -100,7 +101,23 @@ export class MainView extends React.Component{
         [e.target.name]: e.target.value,
       },
     });
-  };
+  }; */
+  
+    var lista = this.state.data;
+    postData()
+       .then(nuevoPuesto => {
+        this.setState({
+          data:[...lista,nuevoPuesto]
+        })
+      })
+      .catch(err => {
+        this.setState({
+          withError: true
+        })
+      })
+    this.setState({ modalInsertar: false});
+  }
+
   render(){
     return(
       <>
@@ -132,10 +149,10 @@ export class MainView extends React.Component{
             {this.state.data.map((dato,index)=>(
               <tr key={index}>
                 <td>{dato.id}</td>
-                <td>{dato.puesto}</td>
-                <td>{dato.empresa}</td>
-                <td>{dato.ciudad}</td>
-                <td>{dato.pais}</td>
+                <td>{dato.position}</td>
+                <td>{dato.organizationId}</td>
+                <td>{dato.placeId}</td>
+                <td>{dato.countrieId}</td>
                 <td>
                 <Button
                       color="primary"

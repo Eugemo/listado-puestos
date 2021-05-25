@@ -26,14 +26,17 @@ export class AddModal extends React.Component {
 	/* 	if(localStorage.getItem("paises") != null){
 			this.setState({
 				paises: JSON.parse(localStorage.getItem("paises"))
-			})
+	
+      })
 		}
     if(localStorage.getItem("ciudades") != null){
 			this.setState({
 				ciudades: JSON.parse(localStorage.getItem("ciudades"))
 			})
 		} */
-    
+    postData().then(res => this.setState({
+      data: res
+    }))
 	}
   
 
@@ -61,8 +64,8 @@ export class AddModal extends React.Component {
   }
 
   insertarPuesto(){
-    this.props.insertarPuesto(this.state);
-    
+   this.props.insertarPuesto(this.state);
+   
   }
   
   render(){
@@ -106,10 +109,10 @@ export class AddModal extends React.Component {
               </label>
               <select class="custom-select" id="inputGroupSelect01" name="ciudad"
 						  onChange={(e) => this.handleSelectCity(e)}
-						  value={JSON.stringify(this.state.ciudad)} >
+						  value={JSON.stringify(this.state.place)} >
 					    	<option value={JSON.stringify({})}>Elija Ciudad</option>
-                  { this.state.ciudades.map((ciudad, index) => (
-                  <option key={index+1} value={JSON.stringify(ciudad)}>{ciudad}</option>
+                  { this.state.places.map((place, index) => (
+                  <option key={index+1} value={JSON.stringify(place)}>{place}</option>
                         ))}
 					</select>
             </FormGroup>

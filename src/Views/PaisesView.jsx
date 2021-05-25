@@ -11,12 +11,12 @@ export class PaisesView extends React.Component{
         };
     }
 
-    /* componentDidMount(){
+    componentDidMount(){
         let prevPaises = localStorage.getItem("paises")
         this.setState({
             paises : JSON.parse()
         })
-    } */
+    } 
 
     addPais = () => {
       let pais = this.state.newPais;

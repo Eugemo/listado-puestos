@@ -35,7 +35,7 @@ export class AddPaises extends React.Component {
 
   loadData = () =>{
     const paisesAlmacenados = JSON.parse(window.localStorage.getItem("paises"));
-    this.state = {
+    this.setState = {
       paises: paisesAlmacenados || [],
       newPais: '', 
     };
