@@ -140,8 +140,8 @@ export class MainView extends React.Component{
                 <th>Id</th>
                 <th>Puesto</th>
                 <th>Empresa</th>
-                <th>Ciudad</th>
-                <th>Pais</th>
+                <th>Descripcion</th>
+               
                 <th>Acciones</th>
             </tr>
           </thead>
@@ -150,16 +150,16 @@ export class MainView extends React.Component{
               <tr key={index}>
                 <td>{dato.id}</td>
                 <td>{dato.position}</td>
-                <td>{dato.organizationId}</td>
-                <td>{dato.placeId}</td>
-                <td>{dato.countrieId}</td>
+                <td>{dato.organization.name}</td>
+                <td>{dato.description}</td>
+                
                 <td>
                 <Button
                       color="primary"
                       onClick={() => this.mostrarModalActualizar(dato)}>
                       Editar
-                    </Button>{" "}
-                    <Button color="danger" onClick={()=> this.eliminar(dato)}>Eliminar</Button>
+                </Button>{" "}
+                <Button color="danger" onClick={()=> this.eliminar(dato)}>Eliminar</Button>
                 </td>
               </tr>
             ))}

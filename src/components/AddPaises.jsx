@@ -1,11 +1,22 @@
 import React from 'react';
-import { Form, Button, Container } from 'reactstrap'
+import { Form, Button, Container } from 'reactstrap';
+import { getPais } from '../jobs/puestosJobs'
 
 export class AddPaises extends React.Component {
     
   constructor(){
     super()
-    this.loadData();
+    //this.loadData();
+    this.state = {
+      data: [],
+    
+    };
+  }
+
+  componentDidMount(){
+    getPais().then(res => this.setState({
+      data: res
+    }))
   }
 
   addPais = () => {
@@ -18,7 +29,7 @@ export class AddPaises extends React.Component {
 
   deletePais = (id) =>{
     this.setState({
-        paises: this.state.paises.filter((pais, idx) => idx !== id)
+        data: this.state.paises.filter((pais, idx) => idx !== id)
     });
 }
 
@@ -33,13 +44,13 @@ export class AddPaises extends React.Component {
     window.localStorage.setItem("paises", JSON.stringify(this.state.paises))
   }
 
-  loadData = () =>{
+  /* loadData = () =>{
     const paisesAlmacenados = JSON.parse(window.localStorage.getItem("paises"));
     this.setState = {
       paises: paisesAlmacenados || [],
       newPais: '', 
     };
-  }
+  } */
 
   render() {
     return (
@@ -47,18 +58,24 @@ export class AddPaises extends React.Component {
         <div>
             <h3>Insertar Paises</h3>
         </div>
-          <Form>
+          {/* <Form>
             <label>Pais: </label>{" "}
             <input type="text" name="pais" value={this.state.newPais} onChange={(e) => this.handleNewPais(e)}/> 
             {"  "}
             <Button color="primary" onClick={this.addPais}>
               Insertar
             </Button>{" "}            
-          </Form>
+          </Form> */}
         <ul>
-          {
-           this.state.paises?.map((elem, idx) => {return <li key={idx}>{elem}</li>})
-          }
+        {
+            this.state.data.map((dato,index) => (
+                 <li key={index}>                 
+                  {dato.id}                
+                  {dato.name}
+                  
+                 </li>
+            ))
+          } 
         </ul>        
         </Container>
     )

@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export const getData = async () => {
     try {
-        const res = await axios.get("https://api-fake-pilar-tecno.herokuapp.com/jobs")
+        const res = await axios.get("https://api-fake-pilar-tecno.herokuapp.com/jobs?_expand=organization")
         return res.data 
     } catch (err) {
         console.error(err)
@@ -42,6 +42,15 @@ export const deleteData = async (id) => {
 export const getPais = async () => {
     try {
         const res = await axios.get("https://api-fake-pilar-tecno.herokuapp.com/countries")
+        return res.data 
+    } catch (err) {
+        console.error(err)
+    }
+};
+
+export const getCiudadPais = async () => {
+    try {
+        const res = await axios.get("https://api-fake-pilar-tecno.herokuapp.com/places?_expand=countrie")
         return res.data 
     } catch (err) {
         console.error(err)

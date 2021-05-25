@@ -1,14 +1,24 @@
 import React from 'react';
 import { Form, Button, Container, FormGroup } from 'reactstrap'
+import { getCiudadPais } from '../jobs/puestosJobs'
 
 export class AddCiudades extends React.Component {
   constructor(){      
     super();
-    this.loadData();
+   // this.loadData();
+    this.state = {
+      data: [],
+    
+    };
   }
 
+  componentDidMount(){
+    getCiudadPais().then(res => this.setState({
+      data: res
+    }))
+  }
   
-  loadData = () =>{    
+  /* loadData = () =>{    
     const paisesAlmacenados = JSON.parse(window.localStorage.getItem("paises"));
     const ciudadesAlmacenadas = JSON.parse(window.localStorage.getItem("ciudades"));
     this.setState = {
@@ -16,7 +26,7 @@ export class AddCiudades extends React.Component {
       ciudades: ciudadesAlmacenadas || [],
       newCiudad: '' 
     };
-  }
+  } */
 
   addCiudad = () => {
     let ciudad = this.state.newCiudad;
@@ -45,7 +55,7 @@ export class AddCiudades extends React.Component {
                 <label>Ciudad: </label>{" "}
                 <input type="text" value={this.state.newCiudad} onChange={(e) => this.handleNewPCiudad(e)}/>
               </FormGroup>
-              <FormGroup>
+             {/*  <FormGroup>
                 <label>Pais:</label>
                 <select class="custom-select" name="pais">
                   <option value={JSON.stringify({})}>Elija Pais</option>
@@ -55,13 +65,22 @@ export class AddCiudades extends React.Component {
                     ))
                   }
                 </select>
-              </FormGroup>            
+              </FormGroup>    */}         
               <Button color="primary" onClick={this.addCiudad}>Insertar</Button>
             </Form>
         <ul>
-                {this.state.ciudades.map((elem, idx) => {return <li key={idx}>{elem}</li>})}
+           {
+            this.state.data.map((dato,index) => (
+                 <li key={index}>                 
+                  {dato.id}                
+                  {dato.name}
+                  {dato.countrieId}
+                  {dato.countrie.name}
+                 </li>
+            ))
+          } 
         </ul>
         </Container>
     )
-  };
+  }
 }
