@@ -1,6 +1,6 @@
 import React from 'react';
 import { Form, Button, Container, FormGroup } from 'reactstrap'
-import { getCiudadPais, postCiudad, getPais } from '../jobs/puestosJobs'
+import { getCiudadPais, postCiudad, getPais, getCiudad } from '../jobs/puestosJobs'
 
 export class AddCiudades extends React.Component {
   constructor(){      
@@ -10,12 +10,17 @@ export class AddCiudades extends React.Component {
       data: [],
       countries:[],
       newCiudad: '',
+      idPais:'',
     };
   }
 
   componentDidMount(){
-    getCiudadPais().then(res => this.setState({
+    getCiudad().then(res => this.setState({
       data: res
+    }))
+
+    getPais().then(res => this.setState({
+      countries: res
     }))
     
   }
@@ -30,9 +35,10 @@ export class AddCiudades extends React.Component {
     };
   } */
 
+
   addCiudad = () => {
-     
-    postCiudad(this.state.newCiudad).then(res => this.setState({
+     let data = {name: this.state.newCiudad, countrieId:this.state.idPais}
+    postCiudad(data).then(res => this.setState({
       data: [...this.state.data, res]
   }))
   
@@ -41,6 +47,12 @@ export class AddCiudades extends React.Component {
   handleNewPCiudad = (e) => {
     this.setState({
         newCiudad: e.target.value
+    })
+  }
+
+  handleNewPais = (e) => {
+    this.setState({
+        idPais: e.target.value
     })
   }
 
@@ -59,11 +71,11 @@ export class AddCiudades extends React.Component {
               </FormGroup>
              <FormGroup>
                 <label>Pais:</label>
-                <select className="custom-select" name="pais">
+                <select className="custom-select" name="pais" onChange={(e) => this.handleNewPais(e)}>
                   <option value=''>Elija Pais</option>
                   { 
                     this.state.countries.map((countrie, index) => (
-                      <option key={index+1} value={countrie.name}>{countrie.name}</option>
+                      <option key={index+1} value={countrie.id}>{countrie.name}</option>
                     ))
                   }
                 </select>
@@ -74,11 +86,12 @@ export class AddCiudades extends React.Component {
         
            {
             this.state.data.map((dato,index) => (
+              
                  <li key={index}>                 
                   {"ID: "} {dato.id}                
                   {" Ciudad: "} {dato.name}
-                  {" - ID: "} {dato.countrieId}
-                  {" Pais: "} {dato.countrie.name}
+                  {" - ID Pais: "} {dato.countrieId}
+                 
                  </li>
             ))
           } 

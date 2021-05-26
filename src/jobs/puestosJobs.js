@@ -60,11 +60,20 @@ export const getCiudadPais = async () => {
     }
 };
 
-export const postCiudad = async (place) => {
+export const getCiudad = async () => {
+    try {
+        const res = await axios.get("https://api-fake-pilar-tecno.herokuapp.com/places")
+        return res.data 
+    } catch (err) {
+        console.error(err)
+    }
+};
+
+export const postCiudad = async (data) => {
     const configRequest = {
         method: 'post',
         url: 'https://api-fake-pilar-tecno.herokuapp.com/places',
-        data: place
+        data: data
     }
     try {
         const res = await axios(configRequest)
