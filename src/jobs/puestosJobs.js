@@ -10,11 +10,11 @@ export const getData = async () => {
     }
 };
 
-export const postData = async (position) => {
+export const postData = async (data) => {
     const configRequest = {
         method: 'post',
         url: 'https://api-fake-pilar-tecno.herokuapp.com/jobs',
-        data: position
+        data: data
     }
     try {
         const res = await axios(configRequest)

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, Modal, ModalBody, ModalHeader, ModalFooter, FormGroup} from 'reactstrap';
-import { postData } from '../jobs/puestosJobs'
+import { postData, getCiudad, getPais } from '../jobs/puestosJobs'
 
 export class AddModal extends React.Component {
   constructor(props){
@@ -11,12 +11,11 @@ export class AddModal extends React.Component {
       this.insertarPuesto = this.insertarPuesto.bind(this);
       this.state={
           id:Date.now(),
-          puesto: "",
-          empresa: "",
-          ciudad: "",
-          pais: "", 
-        countries: [],
-        places: []
+          position: "",
+          description: "",
+          organization: "",          
+        data: [],
+        jobs: "",
       }
       
       
@@ -34,9 +33,8 @@ export class AddModal extends React.Component {
 				ciudades: JSON.parse(localStorage.getItem("ciudades"))
 			})
 		} */
-    postData().then(res => this.setState({
-      data: res
-    }))
+   
+    
 	}
   
 
@@ -64,7 +62,13 @@ export class AddModal extends React.Component {
   }
 
   insertarPuesto(){
-   this.props.insertarPuesto(this.state);
+   //this.props.insertarPuesto(this.state);
+   let jobs = {position: this.state.newCiudad,
+               description: this.state.newDescription,
+               organization: this.state.newOrganization}                              
+   postData(jobs).then(res => this.setState({
+    data: [...this.state.data, jobs]
+  }))
    
   }
   
@@ -78,29 +82,29 @@ export class AddModal extends React.Component {
           <ModalBody>
             <FormGroup>
               <label>
-                Puesto: 
+                Posicion: 
               </label>
               <input
-                className="form-control" name="puesto" type="text" onChange={this.handleChange}/>
+                className="form-control" name="position" type="text" onChange={this.handleChange}/>
             </FormGroup>            
             <FormGroup>
               <label>
                 Empresa: 
               </label>
-              <input className="form-control" name="empresa" type="text" onChange={this.handleChange} />
+              <input className="form-control" name="organization" type="text" onChange={this.handleChange} />
             </FormGroup>
-            <FormGroup>
+            {/* <FormGroup>
               <label>
                 Pais: 
               </label>
               <select class="custom-select" id="inputGroupSelect01" name="pais"
-						onChange={(e) => this.handleSelectCountry(e)}
-						value={JSON.stringify(this.state.countrie)}
-					>
+						onChange={(e) => this.handleSelectCountry(e)}>
 						<option value='' >Elija Pais</option>
-                        { this.state.data.map((countrie, index) => (
-                            <option key={index+1} value={JSON.stringify(countrie)}>{countrie}</option>
-                        ))}
+                  { 
+                    this.state.countries.map((countrie, index) => (
+                      <option key={index+1} value={countrie.id}>{countrie.name}</option>
+                    ))
+                  }
 					</select>
             </FormGroup>
             <FormGroup>
@@ -108,13 +112,20 @@ export class AddModal extends React.Component {
                 Ciudad: 
               </label>
               <select class="custom-select" id="inputGroupSelect01" name="ciudad"
-						  onChange={(e) => this.handleSelectCity(e)}
-						  value={JSON.stringify(this.state.place)} >
-					    	<option value={JSON.stringify({})}>Elija Ciudad</option>
-                  { this.state.places.map((place, index) => (
-                  <option key={index+1} value={JSON.stringify(place)}>{place}</option>
-                        ))}
+						  onChange={(e) => this.handleSelectCity(e)}>
+					    	<option value=''>Elija Ciudad</option>
+                { 
+                    this.state.places.map((place, index) => (
+                      <option key={index+1} value={place.id}>{place.name}</option>
+                    ))
+                  }
 					</select>
+            </FormGroup> */}
+            <FormGroup>
+              <label>
+                Descripcion: 
+              </label>
+              <input className="form-control" name="description" type="text" onChange={this.handleChange} />
             </FormGroup>
             
           </ModalBody>
