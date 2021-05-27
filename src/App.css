@@ -41,3 +41,13 @@ h1 {
   background-position: right;
   margin-top: 20px;  
 }
+
+.body-empresas{
+  background-image: url('./assets/img/empresas.jpg');
+  background-repeat: no-repeat;
+  height: 570px;
+  width: 100%;
+  background-size: cover;
+  background-position: right;
+  color: beige;
+}

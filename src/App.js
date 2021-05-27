@@ -7,6 +7,7 @@ import { MainView } from './views/MainView';
 import { PaisesView } from './views/PaisesView';
 import { CiudadesView } from './views/CiudadesView';
 import { NotFoundView } from './views/NotFoundView';
+import { EmpresasView } from './views/EmpresasView';
 
 const App = () => (
   <div className="App">
@@ -14,8 +15,9 @@ const App = () => (
     <div className="container"> 
       <Switch>
         <Route path="/"  exact component={MainView} />
-        <Route path="/PaisesView"  exact component={PaisesView} />
+        <Route path="/EmpresasView"  exact component={EmpresasView} />
         <Route path="/CiudadesView"  exact component={CiudadesView} />
+        <Route path="/PaisesView"  exact component={PaisesView} />        
         <Route component={NotFoundView} />
       </Switch>
     </div>

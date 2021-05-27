@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { data } from 'jquery';
 
+// opciones API para las posiciones ########################################
 export const getData = async () => {
     try {
         const res = await axios.get("https://api-fake-pilar-tecno.herokuapp.com/jobs?_expand=organization")
@@ -40,6 +41,7 @@ export const deleteData = async (id) => {
     }
 };
 
+// opciones API para Paises #####################################
 export const getPais = async () => {
     try {
         const res = await axios.get("https://api-fake-pilar-tecno.herokuapp.com/countries")
@@ -49,8 +51,23 @@ export const getPais = async () => {
     }
 };
 
+export const postPais = async (countrie) => {
+    const configRequest = {
+        method: 'post',
+        url: 'https://api-fake-pilar-tecno.herokuapp.com/countries',
+        data: {name: countrie}
+    }
+    try {
+        const res = await axios(configRequest)
+        return res.data
+    } catch (err) {
+        console.error(err)
+        
+    }
+};  
 
 
+// opciones API para ciudad ################################## 
 export const getCiudadPais = async () => {
     try {
         const res = await axios.get("https://api-fake-pilar-tecno.herokuapp.com/places?_expand=countrie")
@@ -84,11 +101,13 @@ export const postCiudad = async (data) => {
     }
 };
 
-export const postPais = async (countrie) => {
+  
+// opciones API para Empresa ###############################
+export const postEmpresa = async (data) => {
     const configRequest = {
         method: 'post',
-        url: 'https://api-fake-pilar-tecno.herokuapp.com/countries',
-        data: {name: countrie}
+        url: 'https://api-fake-pilar-tecno.herokuapp.com/organizations',
+        data: data
     }
     try {
         const res = await axios(configRequest)
@@ -97,4 +116,22 @@ export const postPais = async (countrie) => {
         console.error(err)
         
     }
-}    
+};
+
+export const getEmpresaCiudad = async () => {
+    try {
+        const res = await axios.get("https://api-fake-pilar-tecno.herokuapp.com/organizations/?_expand=place")
+        return res.data 
+    } catch (err) {
+        console.error(err)
+    }
+};
+
+export const getEmpresa = async () => {
+    try {
+        const res = await axios.get("https://api-fake-pilar-tecno.herokuapp.com/organizations")
+        return res.data 
+    } catch (err) {
+        console.error(err)
+    }
+}

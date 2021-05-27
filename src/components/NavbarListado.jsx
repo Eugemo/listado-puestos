@@ -23,15 +23,20 @@ export const NavbarListado = () =>(
 			<div className="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul className="navbar-nav me-auto mb-2 mb-lg-0">
 					<li className="nav-item">
-						<Link className="nav-link" to="/PaisesView">
-							Paises
+						<Link className="nav-link" to="/EmpresasView">
+							Empresas
 						</Link>
 					</li>
-          <li className="nav-item">
+					<li className="nav-item">
 						<Link className="nav-link" to="/CiudadesView">
 							Ciudades
 						</Link>
 					</li>
+					<li className="nav-item">
+						<Link className="nav-link" to="/PaisesView">
+							Paises
+						</Link>
+					</li>          			
 				</ul>
 			</div>
 		</div>

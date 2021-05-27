@@ -15,7 +15,8 @@ export class AddModal extends React.Component {
           description: "",
           organization: "",          
         data: [],
-        jobs: "",
+        
+        
       }
       
       
