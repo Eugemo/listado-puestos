@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { data } from 'jquery';
+
 
 // opciones API para las posiciones ########################################
 export const getData = async () => {

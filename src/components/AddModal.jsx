@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, Modal, ModalBody, ModalHeader, ModalFooter, FormGroup} from 'reactstrap';
-import { postData, getCiudad, getPais } from '../jobs/puestosJobs'
+import { postData, getEmpresa } from '../jobs/puestosJobs'
 
 export class AddModal extends React.Component {
   constructor(props){
@@ -12,29 +12,18 @@ export class AddModal extends React.Component {
       this.state={
           id:Date.now(),
           position: "",
-          description: "",
-          organization: "",          
-        data: [],
-        
-        
-      }
-      
-      
+          description: "",                   
+          data: [],
+          organizations: [],
+          
+      }      
   };
 
   componentDidMount() {
-	/* 	if(localStorage.getItem("paises") != null){
-			this.setState({
-				paises: JSON.parse(localStorage.getItem("paises"))
-	
-      })
-		}
-    if(localStorage.getItem("ciudades") != null){
-			this.setState({
-				ciudades: JSON.parse(localStorage.getItem("ciudades"))
-			})
-		} */
-   
+
+    getEmpresa().then(res => this.setState({
+      organizations: res
+    }))
     
 	}
   
@@ -53,6 +42,14 @@ export class AddModal extends React.Component {
       
 		});  
   }
+  
+  handleNewEmpresa = (e) => {
+		e.preventDefault();
+		this.setState({
+			place: JSON.parse(e.target.value),
+      
+		});  
+  }
 
   handleSelectCity = (e) => {
 		e.preventDefault();
@@ -64,11 +61,11 @@ export class AddModal extends React.Component {
 
   insertarPuesto(){
    //this.props.insertarPuesto(this.state);
-   let jobs = {position: this.state.newCiudad,
+   let job = {position: this.state.newPosition,
                description: this.state.newDescription,
                organization: this.state.newOrganization}                              
-   postData(jobs).then(res => this.setState({
-    data: [...this.state.data, jobs]
+   postData(job).then(res => this.setState({
+    data: [...this.state.data, job]
   }))
    
   }
@@ -88,12 +85,23 @@ export class AddModal extends React.Component {
               <input
                 className="form-control" name="position" type="text" onChange={this.handleChange}/>
             </FormGroup>            
-            <FormGroup>
+            {/* <FormGroup>
               <label>
                 Empresa: 
               </label>
               <input className="form-control" name="organization" type="text" onChange={this.handleChange} />
-            </FormGroup>
+            </FormGroup> */}
+            <FormGroup>
+                <label>Empresa:</label>
+                <select className="custom-select" name="pais" onChange={(e) => this.handleNewEmpresa(e)}>
+                  <option value=''>Elija Empresa</option>
+                   { 
+                    this.state.organizations.map((organization, index) => (
+                      <option key={index+1} value={organization.id}>{organization.name}</option>
+                    ))
+                   } 
+                </select>
+              </FormGroup> 
             {/* <FormGroup>
               <label>
                 Pais: 
