@@ -12,6 +12,7 @@ export class MainView extends React.Component{
     super(props)
     this.state = {
     data: [],
+
     withError: false,
     modalActualizar: false,
     modalInsertar: false,
@@ -100,8 +101,23 @@ export class MainView extends React.Component{
   }
 
   //Funcion para CREAR nuevo registro
-  insertar= ()=>{
-   
+  insertar= (estado)=>{
+    const {position,description,place}=estado;
+    let job = {position: position,
+      description: description,
+      organizationId: place.organizationId,
+    }
+     
+    console.log(place+"place")
+ postData(job).then(res => this.setState({
+ data: [...this.state.data, {position: position,
+  description: description,
+  organizationId: place.organizationId,
+ organization: place}],
+
+}))
+this.cerrarModal()                          
+
     getData().then(res => this.setState({
       data: res
     }))
@@ -141,7 +157,7 @@ export class MainView extends React.Component{
         <Table className="table table-striped table-success aling-middle">
           <thead>
             <tr>
-                <th>Id</th>
+                
                 <th>Puesto</th>
                 <th>Empresa</th>
                 <th>Descripcion</th>               
@@ -151,7 +167,7 @@ export class MainView extends React.Component{
           <tbody>
             {this.state.data.map((dato,index)=>(
               <tr key={index}>
-                <td>{dato.id}</td>
+               
                 <td>{dato.position}</td>
                 <td>{dato.organization.name}</td>
                 <td>{dato.description}</td>

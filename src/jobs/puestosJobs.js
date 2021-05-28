@@ -44,6 +44,22 @@ export const deleteData = async (id) => {
     }
 };
 
+export const patchData = async (id,dato) => {
+    console.log(id+"api")
+    const configRequest = {
+        method: 'patch',
+        url: 'https://api-fake-pilar-tecno.herokuapp.com/jobs/'+id,
+        data: dato
+    }
+    try {
+        const res = await axios(configRequest)
+        return res.data
+    } catch (err) {
+       return(console.log('error'))
+        
+    }
+};
+
 // opciones API para Paises #####################################
 export const getPais = async () => {
     try {

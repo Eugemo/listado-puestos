@@ -6,17 +6,17 @@ export class AddModal extends React.Component {
   constructor(props){
       
       super(props)
-      this.props = props
+      //this.props = props
       this.handleChange = this.handleChange.bind(this);
-      this.insertarPuesto = this.insertarPuesto.bind(this);
+      //this.insertarPuesto = this.insertarPuesto.bind(this);
       this.state={
-          id:Date.now(),
+          //id:Date.now(),
           position: "",
           description: "",                   
-          data: [],
+          //data: [],
           organizations: [],
-          cerrarModal: false,
-          
+          //modalInsertar: true,
+          place: '',
       }      
   };
 
@@ -51,6 +51,7 @@ export class AddModal extends React.Component {
 			place: JSON.parse(e.target.value),
       
 		});  
+    console.log(this.state.place,"handle")
   }
 
   handleSelectCity = (e) => {
@@ -61,21 +62,20 @@ export class AddModal extends React.Component {
 		});  
   }
 
-  insertarPuesto(){
-   this.props.insertarPuesto(this.state);
+  /* insertarPuesto(){
+   this.props.insertar(this.state);
    
-   let job = {position: this.state.position,
+  /*  let job = {position: this.state.position,
                description: this.state.description,
                organizationId: this.state.place}
                                             
    postData(job).then(res => this.setState({
     data: [...this.state.data, job],
-    modalInsertar: false
+     
     }))
-   
-                              
-
-  }
+    this.props.cerrarModal()                          
+ 
+  } */
   
   render(){
     return(
@@ -104,7 +104,7 @@ export class AddModal extends React.Component {
                   <option value=''>Elija Empresa</option>
                    { 
                     this.state.organizations.map((organization, index) => (
-                      <option key={index+1} value={organization.id}>{organization.name}</option>
+                      <option key={index+1} value={ JSON.stringify({id:organization.id, name:organization.name})}>{organization.name}</option>
                     ))
                    } 
                 </select>
@@ -146,7 +146,7 @@ export class AddModal extends React.Component {
             
           </ModalBody>
           <ModalFooter>
-            <Button color="primary" onClick={this.insertarPuesto}>
+            <Button color="primary" onClick={() => this.props.insertarPuesto(this.state)}>
               Insertar
             </Button>
             <Button className="btn btn-danger" onClick={this.props.cerrarModal}>

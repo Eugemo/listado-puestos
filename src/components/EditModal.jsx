@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button, Modal, ModalBody, ModalHeader, ModalFooter, FormGroup } from 'reactstrap';
+import { patchData, getData } from '../jobs/puestosJobs'
 
 export class EditModal extends React.Component {
   constructor(props){
@@ -11,12 +12,18 @@ export class EditModal extends React.Component {
           empresa: this.props.data.empresa,
           ciudad: this.props.data.ciudad,
           pais: this.props.data.pais, 
+          positions: [],
       }
 
       this.handleChange = this.handleChange.bind(this);
       this.editar = this.editar.bind(this);
   };
 
+  componentDidMount() {
+    getData().then(res => this.setState({
+      positions: res
+    }))    
+	}
 
   handleChange (e){
     this.setState({
