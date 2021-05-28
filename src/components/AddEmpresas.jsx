@@ -18,16 +18,14 @@ export class AddEmpresas extends React.Component {
 
   componentDidMount(){
     getEmpresa().then(res => this.setState({
-        organizations: res
+        data: res
     }))
     
     getCiudad().then(res => this.setState({
         places: res
     }))
 
-    getData().then(res => this.setState({
-       data: res
-    }))  
+     
   }
   
   addEmpresa = () => {
@@ -76,7 +74,7 @@ export class AddEmpresas extends React.Component {
         <ul>
         
            {
-            this.state.organizations.map((dato,index) => (              
+            this.state.data.map((dato,index) => (              
                  <li key={index}>                 
                   {"ID: "} {dato.id}                
                   {" Empresa: "} {dato.name}
