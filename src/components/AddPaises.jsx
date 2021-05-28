@@ -1,6 +1,6 @@
 import React from 'react';
 import { Container, Form, Button } from 'reactstrap';
-import { getPais, postPais } from '../jobs/puestosJobs'
+import { getPais, postPais, deletePais } from '../jobs/puestosJobs'
 
 export class AddPaises extends React.Component {
     
@@ -25,16 +25,28 @@ export class AddPaises extends React.Component {
      
       postPais(this.state.newPais).then(res => this.setState({
           data: [...this.state.data, res]
-      }))
-      
+      }))    
     
   } 
 
-  deletePais = (id) =>{
+  //funcion para BORRAR registro
+  eliminar = (id) => {    
+    var opcion = window.confirm("Estás Seguro que deseas eliminar  ❓❓");
+    if (opcion === true) {      
+      deletePais(id).then(res =>{
+        getPais().then(res => this.setState({
+          data: res
+        }))
+      })      
+     
+    };
+  }
+
+ /*  deletePais = (id) =>{
     this.setState({
         data: this.state.paises.filter((pais, idx) => idx !== id)
     });
-}
+} */
 
   handleNewPais = (e) => {
     this.setState({
@@ -76,7 +88,7 @@ export class AddPaises extends React.Component {
                  <li key={index}>                 
                   {"ID: "} {dato.id} 
                   {" - "} {dato.name}
-                  
+                  <Button color="danger" onClick={()=> this.eliminar(dato.id)}>Eliminar</Button>
                  </li>
             ))
           } 

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Form, Button, Container, FormGroup } from 'reactstrap'
-import { getCiudad, getData, getEmpresa, postEmpresa } from '../jobs/puestosJobs'
+import { getCiudad, deleteEmpresa, getData, getEmpresa, postEmpresa } from '../jobs/puestosJobs'
 
 export class AddEmpresas extends React.Component {
   constructor(){      
@@ -34,6 +34,19 @@ export class AddEmpresas extends React.Component {
       data: [...this.state.data, res]
   }))
   
+  }
+
+  //funcion para BORRAR registro
+  eliminar = (id) => {    
+    var opcion = window.confirm("Estás Seguro que deseas eliminar  ❓❓");
+    if (opcion === true) {      
+      deleteEmpresa(id).then(res =>{
+        getEmpresa().then(res => this.setState({
+          data: res
+        }))
+      })      
+     
+    };
   }
 
   handleNewEmpresa = (e) => {
@@ -79,6 +92,7 @@ export class AddEmpresas extends React.Component {
                   {"ID: "} {dato.id}                
                   {" Empresa: "} {dato.name}
                   {" - ID Ciudad: "} {dato.placeId}
+                  <Button color="danger" onClick={()=> this.eliminar(dato.id)}>Eliminar</Button>
                  </li>
             ))
            }  

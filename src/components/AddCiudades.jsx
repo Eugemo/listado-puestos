@@ -1,6 +1,6 @@
 import React from 'react';
 import { Form, Button, Container, FormGroup } from 'reactstrap'
-import { getCiudadPais, postCiudad, getPais, getCiudad } from '../jobs/puestosJobs'
+import { getCiudadPais, deleteCiudad, postCiudad, getPais, getCiudad } from '../jobs/puestosJobs'
 
 export class AddCiudades extends React.Component {
   constructor(){      
@@ -42,6 +42,19 @@ export class AddCiudades extends React.Component {
       data: [...this.state.data, res]
   }))
   
+  }
+
+  //funcion para BORRAR registro
+  eliminar = (id) => {    
+    var opcion = window.confirm("Estás Seguro que deseas eliminar  ❓❓");
+    if (opcion === true) {      
+      deleteCiudad(id).then(res =>{
+        getCiudad().then(res => this.setState({
+          data: res
+        }))
+      })      
+     
+    };
   }
 
   handleNewPCiudad = (e) => {
@@ -91,7 +104,7 @@ export class AddCiudades extends React.Component {
                   {"ID: "} {dato.id}                
                   {" Ciudad: "} {dato.name}
                   {" - ID Pais: "} {dato.countrieId}
-                 
+                  <Button color="danger" onClick={()=> this.eliminar(dato.id)}>Eliminar</Button>
                  </li>
             ))
           } 

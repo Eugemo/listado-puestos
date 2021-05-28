@@ -69,6 +69,22 @@ export const postPais = async (countrie) => {
     }
 };  
 
+export const deletePais = async (id) => {
+    console.log(id+"api")
+    const configRequest = {
+        method: 'DELETE',
+        url: 'https://api-fake-pilar-tecno.herokuapp.com/countries/'+id,
+        
+    }
+    try {
+        const res = await axios(configRequest)
+        return res.data
+    } catch (err) {
+       return(console.log('error'))
+        
+    }
+};
+
 
 // opciones API para ciudad ################################## 
 export const getCiudadPais = async () => {
@@ -104,6 +120,21 @@ export const postCiudad = async (data) => {
     }
 };
 
+export const deleteCiudad = async (id) => {
+    console.log(id+"api")
+    const configRequest = {
+        method: 'DELETE',
+        url: 'https://api-fake-pilar-tecno.herokuapp.com/places/'+id,
+        
+    }
+    try {
+        const res = await axios(configRequest)
+        return res.data
+    } catch (err) {
+       return(console.log('error'))
+        
+    }
+};
   
 // opciones API para Empresa ###############################
 export const postEmpresa = async (data) => {
@@ -137,4 +168,20 @@ export const getEmpresa = async () => {
     } catch (err) {
         alert('Ocurrió un error ⚠');
     }
-}
+};
+
+export const deleteEmpresa = async (id) => {
+    console.log(id+"api")
+    const configRequest = {
+        method: 'DELETE',
+        url: 'https://api-fake-pilar-tecno.herokuapp.com/organizations/'+id,
+        
+    }
+    try {
+        const res = await axios(configRequest)
+        return res.data
+    } catch (err) {
+       return(console.log('error'))
+        
+    }
+};
