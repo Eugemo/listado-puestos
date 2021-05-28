@@ -3,7 +3,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Table, Button, Container } from 'reactstrap';
 import { AddModal } from '../components/AddModal';
 import { EditModal } from '../components/EditModal';
-import { getData, postData } from '../jobs/puestosJobs'
+import { deleteData, getData, postData } from '../jobs/puestosJobs'
+
 
 
 export class MainView extends React.Component{
@@ -64,10 +65,19 @@ export class MainView extends React.Component{
     arreglo[pos] = dato
     this.setState({ data: arreglo, modalActualizar: false });
   };
+
   //funcion para BORRAR registro
-  eliminar = (dato) => {
-    var opcion = window.confirm("Estás Seguro que deseas eliminar "+dato.puesto+" ❓❓");
-    if (opcion === true) {
+  eliminar = (id) => {    
+    var opcion = window.confirm("Estás Seguro que deseas eliminar  ❓❓");
+    if (opcion === true) {      
+      deleteData(id).then(res =>{
+        getData().then(res => this.setState({
+          data: res
+        }))
+      })      
+     
+      
+     /*     
       var contador = 0;
       var arreglo = this.state.data;
       arreglo.forEach((registro) => {
@@ -84,11 +94,18 @@ export class MainView extends React.Component{
         contador2++;
       })
       this.setState({data: lista2});
-    }
-  };
+     }
+     */ 
+    };
+  }
+
   //Funcion para CREAR nuevo registro
-  insertar= (position)=>{
-   /*  var lista= this.state.data;
+  insertar= ()=>{
+   
+    getData().then(res => this.setState({
+      data: res
+    }))
+    /*  var lista= this.state.data;
     this.setState({
       data:[...lista,puesto]
     })
@@ -102,15 +119,7 @@ export class MainView extends React.Component{
       },
     });
   }; */
-  let job = {position: this.state.position,
-    description: this.state.description,
-    organizationId: this.state.place}
-    console.log(job)                              
-    postData(job).then(res => this.setState({
-    data: [...this.state.data, job]
-    }))
     
-    this.setState({ modalInsertar: false});
   }
 
   render(){
@@ -153,7 +162,7 @@ export class MainView extends React.Component{
                       onClick={() => this.mostrarModalActualizar(dato)}>
                       Editar
                 </Button>{" "}
-                <Button color="danger" onClick={()=> this.eliminar(dato)}>Eliminar</Button>
+                <Button color="danger" onClick={()=> this.eliminar(dato.id)}>Eliminar</Button>
                 </td>
               </tr>
             ))}

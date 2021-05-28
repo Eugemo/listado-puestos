@@ -22,22 +22,24 @@ export const postData = async (data) => {
         const res = await axios(configRequest)
         return res.data
     } catch (err) {
-        alert('Ocurrió un error post ⚠');
+       return (console.log('error'));
+        
         
     }
 };
 
 export const deleteData = async (id) => {
+    console.log(id+"api")
     const configRequest = {
-        method: 'delete',
-        url: 'https://api-fake-pilar-tecno.herokuapp.com/jobs',
-        data: id
+        method: 'DELETE',
+        url: 'https://api-fake-pilar-tecno.herokuapp.com/jobs/'+id,
+        
     }
     try {
         const res = await axios(configRequest)
         return res.data
     } catch (err) {
-        alert('Ocurrió un error ⚠');
+       return(console.log('error'))
         
     }
 };

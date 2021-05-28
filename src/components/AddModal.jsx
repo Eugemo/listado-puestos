@@ -15,6 +15,7 @@ export class AddModal extends React.Component {
           description: "",                   
           data: [],
           organizations: [],
+          modalInsertar: true,
           
       }      
   };
@@ -62,6 +63,7 @@ export class AddModal extends React.Component {
 
   insertarPuesto(){
    this.props.insertarPuesto(this.state);
+   
    let job = {position: this.state.position,
                description: this.state.description,
                organizationId: this.state.place}
@@ -70,8 +72,8 @@ export class AddModal extends React.Component {
     data: [...this.state.data, job]
     
     }))
-    this.setState({ cerrarModal: false});
-    alert("modal cerrado-esta en el estado?")                              
+    this.setState({ cerrarModal: false}); 
+                              
 
   }
   
