@@ -15,7 +15,7 @@ export class AddModal extends React.Component {
           description: "",                   
           data: [],
           organizations: [],
-          modalInsertar: true,
+          cerrarModal: false,
           
       }      
   };
@@ -67,12 +67,12 @@ export class AddModal extends React.Component {
    let job = {position: this.state.position,
                description: this.state.description,
                organizationId: this.state.place}
-               alert("aca esta el objeto creado en job")                              
+                                            
    postData(job).then(res => this.setState({
-    data: [...this.state.data, job]
-    
+    data: [...this.state.data, job],
+    modalInsertar: false
     }))
-    this.setState({ cerrarModal: false}); 
+   
                               
 
   }
