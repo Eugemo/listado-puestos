@@ -102,19 +102,14 @@ export class MainView extends React.Component{
       },
     });
   }; */
-  
-    var lista = this.state.data;
-    postData()
-       .then(newPosition => {
-        this.setState({
-          data:[...lista,newPosition]
-        })
-      })
-      .catch(err => {
-        this.setState({
-          withError: true
-        })
-      })
+  let job = {position: this.state.position,
+    description: this.state.description,
+    organizationId: this.state.place}
+    console.log(job)                              
+    postData(job).then(res => this.setState({
+    data: [...this.state.data, job]
+    }))
+    
     this.setState({ modalInsertar: false});
   }
 

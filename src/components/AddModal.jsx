@@ -32,6 +32,7 @@ export class AddModal extends React.Component {
     this.setState({
       ...this.state,
       [e.target.name] : e.target.value
+    
     })
   }
 
@@ -60,14 +61,18 @@ export class AddModal extends React.Component {
   }
 
   insertarPuesto(){
-   //this.props.insertarPuesto(this.state);
-   let job = {position: this.state.newPosition,
-               description: this.state.newDescription,
-               organization: this.state.newOrganization}                              
+   this.props.insertarPuesto(this.state);
+   let job = {position: this.state.position,
+               description: this.state.description,
+               organizationId: this.state.place}
+               alert("aca esta el objeto creado en job")                              
    postData(job).then(res => this.setState({
     data: [...this.state.data, job]
-  }))
-   
+    
+    }))
+    this.setState({ cerrarModal: false});
+    alert("modal cerrado-esta en el estado?")                              
+
   }
   
   render(){
@@ -93,7 +98,7 @@ export class AddModal extends React.Component {
             </FormGroup> */}
             <FormGroup>
                 <label>Empresa:</label>
-                <select className="custom-select" name="pais" onChange={(e) => this.handleNewEmpresa(e)}>
+                <select className="custom-select" name="organization" onChange={(e) => this.handleNewEmpresa(e)}>
                   <option value=''>Elija Empresa</option>
                    { 
                     this.state.organizations.map((organization, index) => (
