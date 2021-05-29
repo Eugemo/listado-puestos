@@ -11,18 +11,18 @@ export const getData = async () => {
     }
 };
 
-export const postData = async (data) => {
-    console.log(data)
+export const postData = async (job) => {
+    console.log( JSON.stringify({job}),"en el postdata")
     const configRequest = {
         method: 'post',
         url: 'https://api-fake-pilar-tecno.herokuapp.com/jobs',
-        data: data
+        data: job
     }
     try {
         const res = await axios(configRequest)
         return res.data
     } catch (err) {
-       return (console.log('error'));
+       return (console.log(err));
         
         
     }

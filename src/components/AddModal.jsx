@@ -13,7 +13,7 @@ export class AddModal extends React.Component {
           //id:Date.now(),
           position: "",
           description: "",                   
-          //data: [],
+          data: [],
           organizations: [],
           //modalInsertar: true,
           place: '',

@@ -105,22 +105,28 @@ export class MainView extends React.Component{
     const {position,description,place}=estado;
     let job = {position: position,
       description: description,
-      organizationId: place.organizationId,
+      organizationId: place.id,
     }
      
-    console.log(place+"place")
+    console.log( JSON.stringify({place}),"place")
  postData(job).then(res => this.setState({
  data: [...this.state.data, {position: position,
   description: description,
   organizationId: place.organizationId,
  organization: place}],
+ 
 
 }))
+console.log( JSON.stringify( {position: position,
+  description: description,
+  organizationId: place.organizationId,
+ organization: place}),"el obj agregado")
 this.cerrarModal()                          
 
     getData().then(res => this.setState({
       data: res
     }))
+    
     /*  var lista= this.state.data;
     this.setState({
       data:[...lista,puesto]
